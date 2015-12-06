@@ -33,7 +33,7 @@ class Gmail(object):
             headers + "\r\n\r\n" + body)
 
 
-gm = Gmail('shonnigford@gmail.com', 'Na2mwcbaebs!')
+gm = Gmail('@gmail.com', '')
 
 emails = [
     'shonnigford@gmail.com',
