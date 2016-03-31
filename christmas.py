@@ -40,7 +40,7 @@ class Gmail(object):
         #    headers + "\r\n\r\n" + body)
         self.session.send(to, subject, body)
 
-gm = Gmail('shonnigford@gmail.com', 'Na2mwcbaebs!')
+gm = Gmail('@gmail.com', '')
 
 # emails = [
 #     'shonnigford@gmail.com',
