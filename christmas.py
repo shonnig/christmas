@@ -1,43 +1,67 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
+
+import yagmail
 
 from random import shuffle
 from array import array
 from copy import deepcopy
-import smtplib
+#import smtplib
 
 class Gmail(object):
     def __init__(self, email, password):
+
         self.email = email
         self.password = password
-        self.server = 'smtp.gmail.com'
+        #self.server = 'smtp.gmail.com'
         self.port = 587
-        session = smtplib.SMTP(self.server, self.port)
-        session.ehlo()
-        session.starttls()
-        session.ehlo
-        session.login(self.email, self.password)
-        self.session = session
+
+        yagmail.register(email, password)
+        self.session = yagmail.SMTP()
+
+        #session = smtplib.SMTP_SSL(self.server, self.port)
+        #session.ehlo()
+        #session.starttls()
+        #session.ehlo()
+        #session.login(self.email, self.password)
+        #self.session = session
 
     def send_message(self, to, subject, body):
-        ''' This must be removed '''
-        headers = [
-            "From: " + self.email,
-            "Subject: " + subject,
-            "To: " + to,
-            "MIME-Version: 1.0",
-           "Content-Type: text/html"]
-        headers = "\r\n".join(headers)
-        self.session.sendmail(
-            self.email,
-            to,
-            headers + "\r\n\r\n" + body)
-
+        #''' This must be removed '''
+        #headers = [
+        #    "From: " + self.email,
+        #    "Subject: " + subject,
+        #    "To: " + to,
+        #    "MIME-Version: 1.0",
+        #"Content-Type: text/html"]
+        #headers = "\r\n".join(headers)
+        #self.session.sendmail(
+        #    self.email,
+        #    to,
+        #    headers + "\r\n\r\n" + body)
+        self.session.send(to, subject, body)
 
 gm = Gmail('shonnigford@gmail.com', 'Na2mwcbaebs!')
 
+# emails = [
+#     'shonnigford@gmail.com',
+#     'shonnigford@gmail.com',
+#     'shonnigford@gmail.com',
+#     'TLease@Danscomp.com',
+#     'curtisl@wdsra.com'
+# ]
+#
+# names = [
+#     {'name':'Seth','group':0},
+#     {'name':'Evan','group':1},
+#     {'name':'Rachel','group':2},
+#     {'name':'Janel','group':3},
+#     {'name':'Morgan','group':4},
+#     {'name':'Ryan','group':4}
+# ]
+
 emails = [
     'shonnigford@gmail.com',
-    'todd.honnigford@navistar.com',
+    'Todd.Honnigford@navistar.com',
     'jillmariecleveland@gmail.com',
     'annloochtan@gmail.com',
     'honnigford4@aol.com'
@@ -92,5 +116,5 @@ for e in emails:
         if g['group'] == count:
             body = body + g['name'] + " should buy for " + g['give_to'] + ".\n\n\n"
     gm.send_message(e, 'Christmas gifts', body)
+    print e + ":  " + body
     count = count + 1
-
